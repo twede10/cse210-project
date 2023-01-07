@@ -9,19 +9,19 @@ class Program
 
         int gradePercent = int.Parse(gradeString);
         string gradeLetter;
-        if (gradePercent == 90 || gradePercent > 90)
+        if (gradePercent >= 90)
         {
             gradeLetter = "A";
         }
-        else if (gradePercent == 80 || gradePercent > 80)
+        else if (gradePercent >= 80)
         {
             gradeLetter = "B";
         }
-        else if (gradePercent == 70 || gradePercent > 70)
+        else if (gradePercent >= 70)
         {
             gradeLetter = "C";
         }
-        else if (gradePercent == 60 || gradePercent > 60)
+        else if (gradePercent >= 60)
         {
             gradeLetter = "D";
         }
