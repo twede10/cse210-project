@@ -35,7 +35,7 @@ class Program
         Console.WriteLine($"The sum is: {sum}");
 
         //Calculating the average.
-        average = sum / numbers.Count;
+        average = ((float)sum) / numbers.Count;
         Console.WriteLine($"The average is: {average,0:0.00000}");
 
         //Calculating the largest number.
