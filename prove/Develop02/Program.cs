@@ -50,16 +50,17 @@ class Program
             else if (choice == "3")
             {
                 //Load
-                Console.Write("What is the name of the file.? ");
+                Console.Write("What is the name of the file? ");
                 string file = Console.ReadLine();
 
                 theJournal.Load(file);
+                Console.WriteLine($"journal entries loaded from {file}");
 
             }
             else if (choice == "4")
             {
                 //Save
-                Console.Write("What is the name of the file.? ");
+                Console.Write("What is the name of the file? ");
                 string file = Console.ReadLine();
 
                 theJournal.Save(file);

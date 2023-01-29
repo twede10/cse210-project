@@ -16,7 +16,6 @@ public class Journal
             Console.WriteLine($"Entry: {entry._text}");
             Console.WriteLine();
         }
-        
     }
 
     public void Save(string file)
