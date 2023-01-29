@@ -25,7 +25,7 @@ public class Journal
         {
             foreach (Entry entry in _entries)
             {
-                string line = entry._date + "|" + entry._prompt + "|" + entry._text;
+                string line = $"{entry._index}|{entry._date}|{entry._title}|{entry._prompt}|{entry._text}";
                 sw.WriteLine(line);
             }
         
@@ -43,10 +43,12 @@ public class Journal
                 {
                     string[] parts = line.Split("|");
                     Entry entry = new Entry();
-                    entry._date = parts[0];
-                    entry._prompt = parts[1];
-                    entry._text = parts[2];
-                    _entries.Add(entry);
+                    entry._index = parts[0];
+                    entry._date = parts[1];
+                    entry._title = parts[2];
+                    entry._prompt = parts[3];
+                    entry._entry = parts[4];
+                    entries.Add(entry);
                 }
             }
         }
