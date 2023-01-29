@@ -45,6 +45,7 @@ class Program
                 theEntry._prompt = prompt;
                 theEntry._text = response;
                 theEntry._title = title;
+                theEntry._index = entryNumber;
 
                 // Add it to the journal
                 theJournal.AddEntry(theEntry);
