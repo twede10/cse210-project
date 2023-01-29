@@ -33,6 +33,7 @@ class Program
                 string response = Console.ReadLine();
 
                 // Create a title for the entry
+                Console.WriteLine("Add a title.");
                 string title = Console.ReadLine();
 
                 // Get the current date and save it as a string.

@@ -12,6 +12,8 @@ public class Journal
         foreach (Entry entry in _entries)
         {
             Console.WriteLine($"Date: {entry._date}");
+            Console.WriteLine($"Title: {entry._title}");
+            Console.WriteLine($"index number: {entry._index}");
             Console.WriteLine($"Prompt: {entry._prompt}");
             Console.WriteLine($"Entry: {entry._text}");
             Console.WriteLine();
@@ -47,8 +49,8 @@ public class Journal
                     entry._date = parts[1];
                     entry._title = parts[2];
                     entry._prompt = parts[3];
-                    entry._entry = parts[4];
-                    entries.Add(entry);
+                    entry._text = parts[4];
+                    _entries.Add(entry);
                 }
             }
         }
