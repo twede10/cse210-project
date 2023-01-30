@@ -9,8 +9,8 @@ class Program
 
         Console.WriteLine("Welcome to the Journal Program");
 
-    string choice = "";
-    while (choice != "5")
+        string choice = "";
+        while (choice != "5")
         {
             DisplayMenu();
             Console.WriteLine();
