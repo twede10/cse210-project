@@ -67,9 +67,14 @@ class Scripture
         Console.WriteLine(Reference);
         foreach (Word word in words)
         {
+            string wordText = word.Text;
             if (word.Hidden)
             {
-                Console.Write("_ ");
+                for (int i = 0; i < wordText.Length; i++)
+                {
+                    Console.Write("_");
+                }
+                Console.Write(" ");
             }
             else
             {

@@ -56,6 +56,10 @@ class Program
                 break;
             }
         } while (!scripture.IsFullyHidden());
+        
+        Console.Clear();
+        scripture.Display();
+        Console.WriteLine("");
 
         Console.WriteLine("See you next time!");
     }
