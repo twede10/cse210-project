@@ -5,6 +5,9 @@ class Program
 {
     static void Main(string[] args)
     {
+        int CountBreathing = 0;
+        int CountReflecting = 0;
+        int CountListing = 0;
         int running = 1;
         while(running != 0)
         {
@@ -15,6 +18,7 @@ class Program
             WriteLine("1. Start breathing activity");
             WriteLine("2. Start reflecting activity");
             WriteLine("3. Start listing activity");
+            WriteLine("4. Details");
             WriteLine("0. Quit");
             WriteLine("-----------------------------");
             Write("Select a choice from the menu: ");
@@ -22,6 +26,7 @@ class Program
 
             if (userChoice == "1")
             {
+                CountBreathing += 1;
                 //Create an instance of the breathing activity.
                 Breathing breathing1 = new Breathing();
 
@@ -45,6 +50,7 @@ class Program
 
             else if (userChoice == "2")
             {
+                CountReflecting += 1;
                 //Create an instance of the reflection activity.
                 Reflection reflection1 = new Reflection();
 
@@ -68,6 +74,7 @@ class Program
 
             else if (userChoice == "3")
             {
+                CountListing += 1;
                 //Create an instance of the listing activity.
                 Listing listing1 = new Listing();
 
@@ -89,11 +96,52 @@ class Program
                 listing1.StartListing(intTime);
             }
 
+            else if (userChoice == "4")
+            {
+                int data = 1;
+                while(data == 1)
+                {
+                    Details details1 = new Details();
+                    WriteLine("--------------------");
+                    WriteLine("       Details");
+                    WriteLine("--------------------");
+                    WriteLine("1. Statistics");
+                    WriteLine("2. About activities");
+                    WriteLine("0. Back");
+                    userChoice = ReadLine();
+
+                    if (userChoice == "1")
+                    {
+                        details1.Statistics(CountBreathing, CountReflecting, CountListing);
+                    }
+
+                    else if (userChoice == "2")
+                    {
+                        details1.AboutActivities();
+                    }
+
+                    else if (userChoice == "0")
+                    {
+                        data = 0;
+                    }
+
+                    else
+                    {
+                        WriteLine("Sorry I don't understand that.");
+                    }
+                }
+            }
+
             else if (userChoice == "0")
             {
                 //Close the program.
                 WriteLine("See you next time.");
                 running = 0;
+            }
+
+            else
+            {
+                WriteLine("Sorry I don't understand that.");
             }
         }
     }
