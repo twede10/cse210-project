@@ -30,10 +30,7 @@ class Breathing : Activity
 
         while(SessionTime > 0)
         {
-            //Call breath in.
             breathIn();
-
-            //Call breath out.
             breathOut();
             SessionTime -= 10;
         }

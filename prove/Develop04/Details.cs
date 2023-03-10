@@ -13,6 +13,7 @@ class Details
 
     public void AboutActivities()
     {
+        //display the different activities
         Clear();
         WriteLine("> Breathing Activity:");
         WriteLine("The Breathing Activity is where you slow the pace of your breathing to calm yourself down and relax. You start by stating how long you would like to go for and then alternating between breathing in and out.");

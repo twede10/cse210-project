@@ -3,6 +3,7 @@ using static System.Console;
 
 class Activity
 {
+    //Variables.
     private string _welcomeText;
     private string _activityDiscription;
     private int _sessionTime;

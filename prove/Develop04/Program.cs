@@ -5,6 +5,7 @@ class Program
 {
     static void Main(string[] args)
     {
+        //variables.
         int CountBreathing = 0;
         int CountReflecting = 0;
         int CountListing = 0;

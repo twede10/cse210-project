@@ -5,6 +5,7 @@ class Reflection : Activity
 {
     private List<string> _prompts = new List<string>
     {
+        //prompts.
         "Think of a time when you stood up for someone else."
         ,"Think of a time when you did something really difficult."
         ,"Think of a time when you helped someone in need."
@@ -12,6 +13,7 @@ class Reflection : Activity
     };
     private List<string> _Thoughts = new List<string>
     {
+        //thoughts.
         "Why was this experience meaningful to you?"
         ,"Have you ever done anything like this before?"
         ,"How did you get started?"
