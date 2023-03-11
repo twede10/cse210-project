@@ -1,18 +1,24 @@
 using System;
 using static System.Console;
 
-class Simple : Goals
+public class SimpleGoal : Goal
 {
-    public Simple(string goalTitle, string goalDescription, int goalPoints)
+    public override string GetInfo()
     {
-        SetGoalType("Simple");
-        SetGoalTitle(goalTitle);
-        SetGoalDescription(goalDescription);
-        SetGoalPoints(goalPoints);
+        string basicInfo = BasicInfo();
+        string[] devidedInfo = basicInfo.Split("|");
+        string Title = devidedInfo[0];
+        string Description = devidedInfo[1];
+        string points = devidedInfo[2];
+        int Points = int.Parse(points);
+
+        string goal = CreateGoal(Title, Description, Points);
+        return goal;
     }
 
-    public override void SaveGoal()
+    private string CreateGoal(string title, string description, int Points)
     {
-        
+        string goal = $"Simple|{title}|{description}|{Points}|False";
+        return goal;
     }
 }

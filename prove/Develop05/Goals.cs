@@ -1,66 +1,78 @@
 using System;
 using static System.Console;
 
-abstract class Goals
+public abstract class Goal
 {
-    //variables
-    private string _GoalType;
-    private string _GoalTitle;
-    private string _GoalDiscription;
-    private int _GoalPoints;
-    private List<string> goals = new List<string>();
+    private string _Type;
+    private string _Title;
+    private string _Description;
+    private int _points;
+    private bool _IsComplete;
 
-    //Getters
-    public string GetGoalType()
+    public string GetgoalType()
     {
-        return _GoalType;
+        return _Type;
     }
-    public string GetGoalTitle()
+    public string GetTitle()
     {
-        return _GoalTitle;
+        return _Title;
     }
-    public string GetGoalDescription()
+    public string GetDescription()
     {
-        return _GoalDiscription;
+        return _Description;
     }
-    public int GetGoalPoints()
+    public int GetPoints()
     {
-        return _GoalPoints;
+        return _points;
     }
+    public void SetType(string input)
+    {
+        _Type = input;
+    }
+    public void SetTitle(string input)
+    {
+        _Title = input;
+    }
+    public void SetDescription(string input)
+    {
+        _Description = input;
+    }
+    public void SetPoints(int input)
+    {
+        _points = input;
+    }
+    public abstract string GetInfo();
 
-    //Setters
-    public void SetGoalType(string input)
+    public string BasicInfo()
     {
-        _GoalType = input;
-    }
-    public void SetGoalTitle(string input)
-    {
-        _GoalTitle = input;
-    }
-    public void SetGoalDescription(string input)
-    {
-        _GoalDiscription = input;
-    }
-    public void SetGoalPoints(int input)
-    {
-        _GoalPoints = input;
-    }
+        Clear();
+        Write("What is the Title of this goal: ");
+        string title = ReadLine();
+        Write("What is the description of the goal: ");
+        string description = ReadLine();
+        int Points;
+        while (true)
+        {
+            Write("How many points will you get for completing this goal: ");
+            string points = ReadLine();
+            if (int.TryParse(points, out Points))
+            {
+                if (Points < 0)
+                {
+                    WriteLine("Sorry that number is not valid. Please try again");
+                }
+                else
+                {
+                    break;
+                }
+            }
+            else
+            {
+                WriteLine("Sorry that number is not valid. Please try again");
+            }
+        }
 
-    //Functions
-    public abstract void SaveGoal();
-
-    public void SaveAllGoals()
-    {
-
-    }
-
-    public void LoadGoals()
-    {
-
-    }
-
-    public void RecordEvent()
-    {
-
+        string basicinfo = $"{title}|{description}|{Points}";
+        return basicinfo;
     }
 }

@@ -1,48 +1,58 @@
 using System;
-using System.Collections.Generic;
 using static System.Console;
 
-class Checklist : Goals
-(
-    private List<string> _items = new List<string>();
-
-    // Constructor
-    public ChecklistGoals(string goalTitle, string goalDescription, int goalPoints)
+public class ChecklistGoal : Goal
+{
+    public override string GetInfo()
     {
-        SetGoalType("Checklist");
-        SetGoalTitle(goalTitle);
-        SetGoalDescription(goalDescription);
-        SetGoalPoints(goalPoints);
+        string basicInfo = BasicInfo();
+        string[] devidedInfo = basicInfo.Split("|");
+        string Title = devidedInfo[0];
+        string Description = devidedInfo[1];
+        string points = devidedInfo[2];
+        int Points = int.Parse(points);
+        int BonusPoints;
+        int intTimesNeeded;
+        while (true)
+        {
+            Write("How many times do you need to complete this goal: ");
+            string timesNeeded = ReadLine();
+            if (int.TryParse(timesNeeded, out intTimesNeeded))
+            {
+                if (intTimesNeeded > 0)
+                {
+                    break;
+                }
+                else
+                {
+                    WriteLine("Sorry that number is not valid. Please try again.");
+                }
+            }
+            else
+            {
+                WriteLine("Sorry that number is not valid. Please try again.");
+            }
+        }
+        while (true)
+        {
+            Write($"How many points will you get for completing this goal {intTimesNeeded} times: ");
+            string bonuspoints = ReadLine();
+            if (int.TryParse(bonuspoints, out BonusPoints))
+            {
+                break;
+            }
+            else
+            {
+                WriteLine("Sorry that nuber is not valid. Please try again.");
+            }
+        }
+        string goal = CreateGoal(Title, Description, Points, BonusPoints, intTimesNeeded);
+        return goal;
     }
 
-    // Functions
-    public void AddItem(string item)
+    private string CreateGoal(string title, string description, int Points, int bonusPoints, int intTimesNeeded)
     {
-        _items.Add(item);
+        string goal = $"Checklist|{title}|{description}|{Points}|{bonusPoints}|0|{intTimesNeeded}|False";
+        return goal;
     }
-
-    public void RemoveItem(string item)
-    {
-        _items.Remove(item);
-    }
-
-    public override void SaveGoal()
-    {
-        // Save goal to file
-    }
-
-    public void SaveAllChecklistGoals()
-    {
-        // Save all checklist goals to file
-    }
-
-    public void LoadChecklistGoals()
-    {
-        // Load checklist goals from file
-    }
-
-    public void RecordEvent()
-    {
-        // Record event for checklist goal
-    }
-)
+}

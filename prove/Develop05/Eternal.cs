@@ -1,23 +1,24 @@
 using System;
 using static System.Console;
 
-class Eternal : Goals
+public class EternalGoal : Goal
 {
-    private DateTime _StartDate;
-    private DateTime _EndDate;
-
-    public Eternal(string title, string description, int points, DateTime startDate, DateTime endDate)
+    public override string GetInfo()
     {
-        SetGoalTitle(title);
-        SetGoalDescription(description);
-        SetGoalPoints(points);
+        string basicInfo = BasicInfo();
+        string[] devidedInfo = basicInfo.Split("|");
+        string Title = devidedInfo[0];
+        string Description = devidedInfo[1];
+        string points = devidedInfo[2];
+        int Points = int.Parse(points);
 
-        _StartDate = startDate;
-        _EndDate = endDate;
+        string goal = CreateGoal(Title, Description, Points);
+        return goal;
     }
 
-    public override void SaveGoal()
+    private string CreateGoal(string title, string description, int Points)
     {
-        
+        string goal = $"Eternal|{title}|{description}|{Points}|False";
+        return goal;
     }
 }
