@@ -1,0 +1,130 @@
+using static System.Console;
+
+class LoggingIn
+{
+    public void SetAccountData(string AccountNumber)
+    {
+
+    }
+    public void CreateAccount()
+    {
+        int intCreateAccountNumber;
+        string CreateAccountPassword;
+        while(true)
+        {
+            Write("What is your account number (ex: 1234): ");
+            string CreateAccountNumber = ReadLine();
+            if (int.TryParse(CreateAccountNumber, out   intCreateAccountNumber))
+            {
+                if (intCreateAccountNumber >= 1000)
+                {
+                    if (intCreateAccountNumber <= 9999)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        WriteLine("Sorry, that value is invalid. Please try again.");
+                        Thread.Sleep(3000);
+                    }
+                }
+                else
+                {
+                    WriteLine("Sorry, that value is invalid. Please try again.");
+                    Thread.Sleep(3000);
+                }
+            }
+            else
+            {
+                WriteLine("Sorry, that value is invalid. Please try again.");
+                Thread.Sleep(3000);
+            }
+        }
+        string AccountNumber = intCreateAccountNumber.ToString();
+
+        Write("What is the Password to your account: ");
+        CreateAccountPassword = ReadLine();
+        
+        string AccountPassword = CreateAccountPassword;
+
+        Write("What is your First Name: ");
+        string usernameFirst = ReadLine();
+
+        Write("What is your Last Name: ");
+        string usernameLast = ReadLine();
+
+        using (StreamWriter sw = new StreamWriter(AccountNumber))
+        {
+            string line1 = $"{AccountNumber}|{AccountPassword}";
+            sw.WriteLine(line1);
+            string line2 = $"{usernameFirst}|{usernameLast}";
+            sw.WriteLine(line2);
+        }
+
+        WriteLine("Account successfully created.");
+        Thread.Sleep(3000);
+    }
+
+    public void loginToAccount()
+    {
+        string AccountNumber;
+        while(true)
+        {
+            Clear();
+            //ask the user for their username and password.
+            Write("Account Number: ");
+            AccountNumber = ReadLine();
+            Write("Password: ");
+            string AccountPassword = ReadLine();
+
+            //Check to see if it matches any files.
+            if (CheckAccount(AccountNumber, AccountPassword, Environment.CurrentDirectory))
+            {
+                WriteLine("Logging in...");
+
+                List<string> AccountInfo = LoggingInProcess(AccountNumber);
+                UserInfo userinfo = new UserInfo();
+                userinfo.SetFirstName(AccountInfo[2]);
+                userinfo.SetLastName(AccountInfo[3]);
+
+                string firstName = userinfo.GetFirstName();
+                string lastName = userinfo.GetLastName();
+                WriteLine("Login successful.");
+                Thread.Sleep(1000);
+                WriteLine($"Welcome back {firstName} {lastName}.");
+                Thread.Sleep(3000);
+                break;
+            }
+            else
+            {
+                WriteLine("Invalid Account Number or Password.");
+                Thread.Sleep(3000);
+            }
+        }
+    }
+
+    public bool CheckAccount(string AccountNumber, string AccountPassword, string directoryPath)
+    {
+        foreach (string filePath in Directory.GetFiles(directoryPath))
+        {
+            string[] lines = File.ReadAllLines(filePath);
+            if (lines.Length > 0 && lines[0] == $"{AccountNumber}|{AccountPassword}")
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<string> LoggingInProcess(string AccountNumber)
+    {
+        string filePath = Path.Combine(Environment.CurrentDirectory, AccountNumber);
+        List<string> accountInfo = new List<string>();
+        string[] lines = File.ReadAllLines(filePath);
+        accountInfo.Add(lines[0].Split("|")[0]);
+        accountInfo.Add(lines[0].Split("|")[1]);
+        accountInfo.Add(lines[1].Split("|")[0]);
+        accountInfo.Add(lines[1].Split("|")[1]);
+        return accountInfo;
+    }
+}
