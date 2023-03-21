@@ -49,8 +49,10 @@ class LoggingInClass
 
         using (StreamWriter sw = new StreamWriter(CreateAccountNumber))
         {
-            string line1 = $"{CreateAccountNumber}|{CreateAccountPassword}|{usernameFirst}|{usernameLast}";
+            string line1 = $"{CreateAccountNumber}|{CreateAccountPassword}";
             sw.WriteLine(line1);
+            string line2 = $"{usernameFirst}|{usernameLast}";
+            sw.WriteLine(line2);
         }
         WriteLine("Account successfully created.");
         Thread.Sleep(3000);
@@ -64,7 +66,7 @@ class LoggingInClass
         accountInfo.Add(lines[0].Split('|')[0]);
         accountInfo.Add(lines[0].Split('|')[1]);
         accountInfo.Add(lines[1].Split('|')[0]);
-        accountInfo.Add(lines[1].Split('|')[0]);
+        accountInfo.Add(lines[1].Split('|')[1]);
         return accountInfo;
     }    
 
