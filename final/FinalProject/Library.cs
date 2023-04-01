@@ -49,11 +49,16 @@ class Library
         string filename = $"{AccountNumber}{LibraryPassword}0001";
         LoadFromFile(filename);
         List<string> NewData = new List<string>();
+        NewData.Add(AccountData[0]);
+        NewData.Add(AccountData[1]);
+        NewData.Add(AccountData[2]);
+        NewData.Add(AccountData[3]);
+        NewData.Add(AccountData[4]);
 
 
         while(true)
         {
-            SaveToFile(filename);
+            SaveToFile(filename, items);
             Clear();
             string userChoice = "";
             WriteLine("Library Menu");
@@ -74,32 +79,11 @@ class Library
             else if (userChoice == "2")
             {
                 //Remove Item From list.
+                RemoveItem(items);
             }
             else if (userChoice == "3")
             {
-                Clear();
-                int index = 1;
-                foreach(string item in items)
-                {
-                    string[] parts = item.Split("|");
-                    string type = parts[0];
-                    string title = parts[1];
-                    string author = parts[2];
-                    string other = parts[3];
-                    if (type == "DVD")
-                    {
-                        WriteLine($"[{index}] Type: {type}, Title: {title}, Author: {author}, Length: {other}");
-                    }
-                    else if (type == "Book")
-                    {
-                        WriteLine($"[{index}] Type: {type}, Title: {title}, Author: {author}, Number of Pages: {other}");
-                    }
-                    else if (type == "Magazine")
-                    {
-                        WriteLine($"[{index}] Type: {type}, Title: {title}, Author: {author}, Issue Number: {other}");
-                    }
-                    index += 1;
-                }
+                DisplayItems(items);
                 WriteLine("Press enter when done.");
                 ReadLine();
             }
@@ -171,48 +155,143 @@ class Library
             }
         }
     }
-    private void RemoveItem()
+    private void RemoveItem(List<string> items)
     {
+        DisplayItems(items);
 
+        Write("Enter the index number of the item you want to remove: ");
+        int index = int.Parse(ReadLine()) - 1;
+
+        items.RemoveAt(index);
+
+        WriteLine("Item Reoved.");
+        DisplayItems(items);
     }
-    private void SaveToFile(string fileName)
+    private void DisplayItems(List<string> items)
     {
-
+        Clear();
+        int index = 1;
+        foreach(string item in items)
+        {
+            string[] parts = item.Split("|");
+            string type = parts[0];
+            string title = parts[1];
+            string author = parts[2];
+            string other = parts[3];
+            if (type == "DVD")
+            {
+                WriteLine($"[{index}] Type: {type}, Title: {title}, Author: {author}, Length: {other}");
+            }
+            else if (type == "Book")
+            {
+                WriteLine($"[{index}] Type: {type}, Title: {title}, Author: {author}, Number of Pages{other}");
+            }
+            else if (type == "Magazine")
+            {
+                WriteLine($"[{index}] Type: {type}, Title: {title}, Author: {author}, Issue Number: {other}");
+            }
+            index += 1;
+        }
+    }
+    private void SaveToFile(string fileName, List<string> items)
+    {
+        using (StreamWriter sw = new StreamWriter(fileName))
+        {
+            foreach (string item in items)
+            {
+                sw.WriteLine(item);
+            }
+        }
     }
     private void LoadFromFile(string fileName)
     {
+        string line;
         if (!File.Exists(fileName))
         {
             File.Create(fileName);
         }
 
+        int index = 1;
+        foreach (string l in File.ReadAllLines(fileName))
+        {
+            items.Add(l);
+        }
+
         foreach (string item in items)
         {
+            string[] parts = item.Split("|");
+            string type = parts[0];
+            string title = parts[1];
+            string author = parts[2];
+            string other = parts[3];
             if (IsDVD(item))
             {
                 //Process DVD item
+                line = $"[{index}] Type: {type}, Title: {title}, Author: {author}, Length: {other}";
             }
             else if (IsBook(item))
             {
                 //Process book Item
+                line = $"[{index}] Type: {type}, Title: {title}, Author: {author}, Number of Pages{other}";
             }
             else if (IsMagazine(item))
             {
                 //Process Magazine Item
+                line = $"[{index}] Type: {type}, Title: {title}, Author: {author}, Issue Number: {other}";
             }
+            else
+            {
+                line = "";
+            }
+            List<string> Items = new List<string>();
+            Items.Add(line);
+            index += 1;
         }
     }
 
     private bool IsDVD(string item)
     {
-        return false;
+        string[] parts = item.Split("|");
+        string type = parts[0];
+        bool isdvd;
+        if (type == "DVD")
+        {
+            isdvd = true;
+        }
+        else
+        {
+            isdvd = false;
+        }
+        return isdvd;
     }
     private bool IsBook(string item)
     {
-        return false;
+        string[] parts = item.Split("|");
+        string type = parts[0];
+        bool isbook;
+        if (type == "DVD")
+        {
+            isbook = true;
+        }
+        else
+        {
+            isbook = false;
+        }
+        return isbook;
     }
     private bool IsMagazine(string item)
     {
-        return false;
+        string[] parts = item.Split("|");
+        string type = parts[0];
+        bool ismagazine;
+        if (type == "DVD")
+        {
+            ismagazine = true;
+        }
+        else
+        {
+            ismagazine = false;
+        }
+        return ismagazine;
     }
 }
