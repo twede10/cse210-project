@@ -9,6 +9,11 @@ class MainMenuclass
     string userChoice;
     public List<string> MainMenu(List<string> AccountData)
     {
+        NewData.Add(AccountData[0]);
+        NewData.Add(AccountData[1]);
+        NewData.Add(AccountData[2]);
+        NewData.Add(AccountData[3]);
+        NewData.Add(AccountData[4]);
         while(true)
         {
             DisplayMainMenu();

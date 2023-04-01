@@ -10,6 +10,7 @@ class Settings
 
         while(true)
         {
+            NewData = AccountData;
             DisplaySettingsMenu();
             userChoice = ReadLine();
 
@@ -19,12 +20,12 @@ class Settings
             }
             else if (userChoice == "1")
             {
-                NewData = AccountData;
-                DisplayInfo(NewData);
+                DisplayInfo(AccountData);
             }
             else if (userChoice == "2")
             {
                 NewData = ChangeInfo(AccountData);
+                AccountData = NewData;
             }
             else
             {

@@ -3,7 +3,6 @@ using static System.Console;
 
 class Login
 {
-    string AccountNumber;
     List<string> NewData = new List<string>();
     public List<string> LoginMenu(List<string> AccountData)
     {
