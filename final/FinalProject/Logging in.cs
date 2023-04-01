@@ -6,7 +6,7 @@ class LoggingIn
     {
 
     }
-    public void CreateAccount()
+    public List<string> CreateAccount()
     {
         int intCreateAccountNumber;
         string CreateAccountPassword;
@@ -53,20 +53,43 @@ class LoggingIn
         Write("What is your Last Name: ");
         string usernameLast = ReadLine();
 
+        List<string> AccountData = new List<string>();
+        AccountData.Add(AccountNumber);
+        AccountData.Add(AccountPassword);
+        AccountData.Add(usernameFirst);
+        AccountData.Add(usernameLast);
+        List<string> NewData = new List<string>();
+
+        using (StreamWriter sw = new StreamWriter(AccountNumber))
+        {
+            sw.WriteLine("File Created");
+        }
+
+        Library library = new Library();
+        NewData = library.StartLibrary(AccountData);
+        AccountData = NewData;
+        string LibraryPassword = AccountData[4];
+
         using (StreamWriter sw = new StreamWriter(AccountNumber))
         {
             string line1 = $"{AccountNumber}|{AccountPassword}";
             sw.WriteLine(line1);
             string line2 = $"{usernameFirst}|{usernameLast}";
             sw.WriteLine(line2);
+            string line3 = $"{LibraryPassword}";
+            sw.WriteLine(line3);
         }
+
+        NewData = LoggingInProcess(AccountNumber);
 
         WriteLine("Account successfully created.");
         Thread.Sleep(3000);
+        return NewData;
     }
 
-    public void loginToAccount()
+    public List<string> loginToAccount()
     {
+        List<string> NewData = new List<string>();
         string AccountNumber;
         while(true)
         {
@@ -93,6 +116,9 @@ class LoggingIn
                 Thread.Sleep(1000);
                 WriteLine($"Welcome back {firstName} {lastName}.");
                 Thread.Sleep(3000);
+
+                NewData = LoggingInProcess(AccountNumber);
+
                 break;
             }
             else
@@ -101,6 +127,7 @@ class LoggingIn
                 Thread.Sleep(3000);
             }
         }
+        return NewData;
     }
 
     public bool CheckAccount(string AccountNumber, string AccountPassword, string directoryPath)
@@ -125,6 +152,7 @@ class LoggingIn
         accountInfo.Add(lines[0].Split("|")[1]);
         accountInfo.Add(lines[1].Split("|")[0]);
         accountInfo.Add(lines[1].Split("|")[1]);
+        accountInfo.Add(lines[2].Split("|")[0]);
         return accountInfo;
     }
 }

@@ -20,13 +20,13 @@ class Login
             if (UserChoice == "1")
             {
                 //Have the user create an account.
-                loggingin.CreateAccount();
+                NewData = loggingin.CreateAccount();
                 break;
             }
             else if (UserChoice == "2")
             {
                 //Have the user Log in to their account.
-                loggingin.loginToAccount();
+                NewData = loggingin.loginToAccount();
                 break;
             }
             else
