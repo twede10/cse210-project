@@ -184,7 +184,7 @@ class Library
             }
             else if (type == "Book")
             {
-                WriteLine($"[{index}] Type: {type}, Title: {title}, Author: {author}, Number of Pages{other}");
+                WriteLine($"[{index}] Type: {type}, Title: {title}, Author: {author}, Number of Pages: {other}");
             }
             else if (type == "Magazine")
             {
@@ -209,6 +209,7 @@ class Library
         if (!File.Exists(fileName))
         {
             File.Create(fileName);
+            Thread.Sleep(100);
         }
 
         int index = 1;
@@ -232,7 +233,7 @@ class Library
             else if (IsBook(item))
             {
                 //Process book Item
-                line = $"[{index}] Type: {type}, Title: {title}, Author: {author}, Number of Pages{other}";
+                line = $"[{index}] Type: {type}, Title: {title}, Author: {author}, Number of Pages: {other}";
             }
             else if (IsMagazine(item))
             {
