@@ -208,11 +208,11 @@ class Library
         string line;
         if (!File.Exists(fileName))
         {
-            File.Create(fileName);
-            Thread.Sleep(100);
+            File.Create(fileName).Close();
         }
 
         int index = 1;
+        
         foreach (string l in File.ReadAllLines(fileName))
         {
             items.Add(l);
