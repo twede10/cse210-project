@@ -17,8 +17,5 @@ class Program
         MainMenuclass menu = new MainMenuclass();
         NewData = menu.MainMenu(AccountData);
         AccountData = NewData;
-
-        CommonComands common = new CommonComands();
-        common.UpdateAccountData(OldAccountNumber, AccountData);
     }
 }
