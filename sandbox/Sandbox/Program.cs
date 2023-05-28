@@ -1,28 +1,25 @@
 using System;
-using static System.Console;
-using System.Diagnostics;
+using System.Windows.Forms;
 
 class Program
 {
     static void Main(string[] args)
     {
-        while(true)
+        while (true)
         {
-            WriteLine("This program will restart when you press enter. press 0 to quit");
-            string UserInput = ReadLine();
+            Console.WriteLine("Press Enter to restart, or 0 to exit.");
+            var input = Console.ReadLine();
 
-            if (UserInput == "0")
+            if (input == "0")
             {
+                Console.WriteLine("Exiting program.");
                 break;
             }
-            else if (UserInput == "")
-            {
-                ProcessStartInfo startInfo = new ProcessStartInfo();
-                startInfo.FileName = "C:\\Users\\Connor Twede\\OneDrive\\Desktop\\BYUI\\Procraming with Classes CSE210\\Github repository\\cse210-project\\sandbox\\Sandbox\\Program.cs";
 
-                Process process = new Process();
-                process.StartInfo = startInfo;
-                process.Start();
+            if (string.IsNullOrEmpty(input))
+            {
+                Console.WriteLine("Restarting...");
+                Application.Restart();
                 break;
             }
         }
